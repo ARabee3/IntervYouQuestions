@@ -2,6 +2,5 @@
 
 public record ModelAnswerRequest(
     string Text,
-    string KeyPoints,
-    int QuestionId
+    string KeyPoints
 );

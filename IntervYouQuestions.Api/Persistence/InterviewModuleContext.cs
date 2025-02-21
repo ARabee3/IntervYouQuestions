@@ -27,7 +27,7 @@ public partial class InterviewModuleContext : DbContext
     public virtual DbSet<Topic> Topics { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=RABEE3;Database=Interview_Module;Trusted_Connection=True;TrustServerCertificate=True;");
+        => optionsBuilder.UseSqlServer("Server=db11765.public.databaseasp.net; Database=db11765; User Id=db11765; Password=oT?9K8s_3m=F; Encrypt=False; MultipleActiveResultSets=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

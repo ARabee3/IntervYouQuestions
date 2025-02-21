@@ -25,12 +25,52 @@ public class QuestionService(InterviewModuleContext context) : IQuestionService
         .AsNoTracking()
         .FirstOrDefaultAsync(q => q.QuestionId == id);
     }
-
+    
     public async Task<Question> AddAsync(Question request)
     {
         await _context.Questions.AddAsync(request);
         await _context.SaveChangesAsync();
         return request;
+    }
+
+    public async Task<Question> AddWithOptionAsync(QuestionWithOptionsRequest request)
+    {
+        var question = new Question
+        {
+            Type = request.Type,
+            Text = request.Text,
+            Difficulty = request.Difficulty,
+            TopicId = request.TopicId,
+            QuestionOptions = request.Options.Select(o => new QuestionOption
+            {
+                Text = o.Text,
+                IsCorrect = o.IsCorrect
+            }).ToList()
+        };
+
+        await _context.Questions.AddAsync(question);
+        await _context.SaveChangesAsync();
+        return question;
+    }
+
+    public async Task<Question> AddWithModelAnswerAsync(QuestionWithModelAnswerRequest request)
+    {
+        var question = new Question
+        {
+            Type = request.Type,
+            Text = request.Text,
+            Difficulty = request.Difficulty,
+            TopicId = request.TopicId,
+            ModelAnswers = request.ModelAnswers.Select(ma => new ModelAnswer
+            {
+                Text = ma.Text,
+                KeyPoints = ma.KeyPoints
+            }).ToList()
+        };
+
+        await _context.Questions.AddAsync(question);
+        await _context.SaveChangesAsync();
+        return question;
     }
 
     public async Task<bool> UpdateAsync(int id, Question request)

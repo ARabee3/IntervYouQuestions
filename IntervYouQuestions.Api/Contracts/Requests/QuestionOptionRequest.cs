@@ -2,6 +2,5 @@
 
 public record QuestionOptionRequest(
     string Text,
-    bool IsCorrect,
-    int QuestionId
+    bool IsCorrect
 );
